@@ -199,18 +199,19 @@ export default {
 				this.loadingSlots = false
 			}
 		},
-		async onSave({ slot, displayName, email, description, timeZone }) {
+		async onSave({ slot, displayName, email, description, phoneNumber, timeZone }) {
 			console.info('slot will be booked', {
 				slot,
 				description,
 				email,
 				displayName,
+				phoneNumber,
 				timeZone,
 			})
 
 			this.bookingError = false
 			try {
-				await bookSlot(this.config, slot, displayName, email, description, timeZone)
+				await bookSlot(this.config, slot, displayName, email, description, phoneNumber, timeZone)
 
 				console.info('appointment booked')
 
