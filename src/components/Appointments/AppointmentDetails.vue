@@ -41,6 +41,13 @@
 					autocomplete="on"
 					autocorrect="off"
 					required>
+				<div>
+					{{ $t('phoneNumber', 'Your phone number') }}
+				</div>
+				<input v-model="phoneNumber"
+					type="tel"
+					pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+					required>
 				<div class="meeting-info">
 					{{ $t('calendar', 'Please share anything that will help prepare for our meeting') }}
 					<div class="meeting-text">
@@ -116,6 +123,7 @@ export default {
 			description: '',
 			email: this.visitorInfo.email,
 			displayName: this.visitorInfo.displayName,
+			phoneNumber: this.visitorInfo.phoneNumber,
 			timeZone: this.timeZoneId,
 		}
 	},
@@ -135,6 +143,7 @@ export default {
 				email: this.email,
 				displayName: this.displayName,
 				timeZone: this.timeZone,
+				phoneNumber: this.phoneNumber,
 			})
 		},
 	},
