@@ -151,6 +151,7 @@ class BookingController extends Controller {
 	 * @param string $displayName
 	 * @param string $email
 	 * @param string $description
+	 * @param string $phoneNumber
 	 * @param string $timeZone
 	 * @return JsonResponse
 	 */
@@ -160,6 +161,7 @@ class BookingController extends Controller {
 							 string $displayName,
 							 string $email,
 							 string $description,
+							 string $phoneNumber,
 							 string $timeZone): JsonResponse {
 		if ($start > $end) {
 			return JsonResponse::fail('Invalid time range', Http::STATUS_UNPROCESSABLE_ENTITY);
@@ -172,7 +174,7 @@ class BookingController extends Controller {
 			return JsonResponse::fail(null, Http::STATUS_NOT_FOUND);
 		}
 		try {
-			$booking = $this->bookingService->book($config, $start, $end, $timeZone, $displayName, $email, $description);
+			$booking = $this->bookingService->book($config, $start, $end, $timeZone, $displayName, $email, $description, $phoneNumber);
 		} catch (NoSlotFoundException $e) {
 			$this->logger->warning('No slot available for start: ' . $start . ', end: ' . $end . ', config id: ' . $appointmentConfigId , ['exception' => $e]);
 			return JsonResponse::fail(null, Http::STATUS_NOT_FOUND);
