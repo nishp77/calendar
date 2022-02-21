@@ -44,6 +44,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setDescription(?string $description)
  * @method string getEmail()
  * @method void setEmail(string $email)
+ * @method string getphoneNumber()
+ * @method void setphoneNumber(string $phoneNumber)
  * @method int getStart()
  * @method void setStart(int $start)
  * @method int getEnd()
@@ -85,6 +87,9 @@ class Booking extends Entity implements JsonSerializable {
 	/** @var bool */
 	protected $confirmed;
 
+	/** @var string */
+	protected $phoneNumber;
+
 	public function __construct() {
 		$this->addType('id', 'integer');
 		$this->addType('apptConfigId', 'integer');
@@ -107,6 +112,7 @@ class Booking extends Entity implements JsonSerializable {
 			'end' => $this->getEnd(),
 			'timezone' => $this->getTimezone(),
 			'confirmed' => $this->isConfirmed(),
+			'phoneNumber' => $this->getPhoneNumber(),
 		];
 	}
 }
