@@ -121,9 +121,9 @@ class BookingService {
 	/**
 	 * @throws ClientException|ServiceException|DbException
 	 */
-	public function book(AppointmentConfig $config,int $start, int $end, string $timeZone, string $displayName, string $email, ?string $description = null): Booking {
+	public function book(AppointmentConfig $config,int $start, int $end, string $timeZone, string $displayName, string $email, ?string $description = null, string $phoneNumber): Booking {
 		$bookingSlot = current($this->getAvailableSlots($config, $start, $end));
-
+		
 		if (!$bookingSlot) {
 			throw new NoSlotFoundException('Could not find slot for booking');
 		}
@@ -144,6 +144,7 @@ class BookingService {
 		$booking->setStart($start);
 		$booking->setEnd($end);
 		$booking->setTimezone($tz->getName());
+		$booking->setPhoneNumber($phoneNumber);
 		try {
 			$this->bookingMapper->insert($booking);
 		} catch (Exception $e) {
